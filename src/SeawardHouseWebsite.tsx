@@ -1,7 +1,9 @@
+const selectedWorkLeadImage =
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png";
+
 const selectedWorkPlaceholders = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992583/Screenshot_2026-04-23_at_4.18.04_PM_pot0x2.png",
 ];
@@ -220,6 +222,20 @@ export default function SeawardHouseWebsite() {
             <p className="mt-3 text-sm leading-relaxed text-black/60 sm:text-[15px]">
               Placeholder frames from recent shoots. Final selects and motion pieces ship on delivery.
             </p>
+          </div>
+
+          <div className="mb-12 flex justify-center">
+            <img
+              src={selectedWorkLeadImage}
+              alt="Seaward House work"
+              style={{
+                width: "100%",
+                maxWidth: "420px",
+                height: "420px",
+                objectFit: "cover",
+                borderRadius: "16px",
+              }}
+            />
           </div>
 
           <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
