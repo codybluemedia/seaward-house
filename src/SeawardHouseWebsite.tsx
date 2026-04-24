@@ -1,4 +1,4 @@
-const selectedWorkLeadImage =
+const heroStillImage =
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png";
 
 const selectedWorkPlaceholders = [
@@ -128,17 +128,18 @@ export default function SeawardHouseWebsite() {
             </div>
           </div>
 
-          <div className="w-full">
-            <div className="overflow-hidden rounded-[2rem] border border-black/10 bg-black shadow-[0_20px_80px_rgba(0,0,0,0.06)]">
-              <video
-                src="/Videos/hero.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="h-[340px] w-full object-cover lg:h-[min(520px,52vh)]"
-              />
-            </div>
+          <div className="flex w-full justify-center lg:justify-end">
+            <img
+              src={heroStillImage}
+              alt="Seaward House work"
+              style={{
+                width: "100%",
+                maxWidth: "420px",
+                height: "420px",
+                objectFit: "cover",
+                borderRadius: "16px",
+              }}
+            />
           </div>
         </div>
       </section>
@@ -224,28 +225,14 @@ export default function SeawardHouseWebsite() {
             </p>
           </div>
 
-          <div className="mb-12 flex justify-center">
-            <img
-              src={selectedWorkLeadImage}
-              alt="Seaward House work"
-              style={{
-                width: "100%",
-                maxWidth: "420px",
-                height: "420px",
-                objectFit: "cover",
-                borderRadius: "16px",
-              }}
-            />
-          </div>
-
-          <ul className="grid list-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          <ul className="mx-auto grid w-full max-w-7xl list-none grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
             {selectedWorkPlaceholders.map((src, i) => (
-              <li key={src}>
-                <div className="overflow-hidden rounded-2xl border border-black/10 bg-black shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+              <li key={src} className="min-w-0">
+                <div className="overflow-hidden rounded-[16px] border border-black/10 shadow-[0_8px_28px_rgba(0,0,0,0.05)]">
                   <img
                     src={src}
                     alt={`Selected work placeholder ${i + 1}`}
-                    className="aspect-[4/5] w-full object-cover transition duration-500 hover:scale-[1.02]"
+                    className="h-[260px] w-full object-cover"
                     loading="lazy"
                   />
                 </div>
