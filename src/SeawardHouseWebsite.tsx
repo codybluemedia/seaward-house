@@ -1,5 +1,4 @@
 export default function SeawardHouseWebsite() {
-
     const images = [
       "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
       "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
@@ -9,21 +8,25 @@ export default function SeawardHouseWebsite() {
     ];
   
     return (
-      <div style={{ padding: "40px", background: "#111", minHeight: "100vh" }}>
-        
+      <div style={{ background: "#f6f3ee", minHeight: "100vh", padding: "40px" }}>
         <h1 style={{
-          color: "white",
-          fontSize: "48px",
+          fontSize: "60px",
+          fontWeight: "900",
+          textTransform: "uppercase",
           marginBottom: "40px"
         }}>
           Seaward House
         </h1>
   
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "20px"
-        }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "10px",
+            borderRadius: "20px",
+            overflow: "hidden",
+          }}
+        >
           {images.map((src, i) => (
             <img
               key={i}
@@ -31,13 +34,11 @@ export default function SeawardHouseWebsite() {
               style={{
                 width: "100%",
                 height: "300px",
-                objectFit: "cover"
+                objectFit: "cover",
               }}
             />
           ))}
         </div>
-  
       </div>
     );
   }
-  
