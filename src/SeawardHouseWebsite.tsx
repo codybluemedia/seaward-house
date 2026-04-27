@@ -386,7 +386,7 @@ export default function SeawardHouseWebsite() {
       <footer className="border-t border-black/10 bg-[#f8f8f8] px-6 py-12 lg:px-10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 text-sm text-black/55 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
           <a
-            href="mailto:hello@seawardhouse.com"
+            href="#contact"
             className="transition hover:text-black"
           >
             hello@seawardhouse.com
