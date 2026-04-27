@@ -1,5 +1,5 @@
-const heroDrivePreviewUrl =
-  "https://drive.google.com/file/d/1i2FWGSBffsMaIZpcr3a2K0trXQeExuGw/preview";
+const heroYouTubeEmbedUrl =
+  "https://www.youtube.com/embed/sbefhNHI0jE?autoplay=1&mute=1&loop=1&playlist=sbefhNHI0jE&controls=0&modestbranding=1";
 
 const selectedWorkPlaceholders = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
@@ -130,23 +130,20 @@ export default function SeawardHouseWebsite() {
           </div>
 
           <div className="flex w-full justify-center lg:justify-end">
-            <div
+            <iframe
+              src={heroYouTubeEmbedUrl}
+              title="Seaward House Reel"
+              frameBorder={0}
+              allow="autoplay; encrypted-media"
+              allowFullScreen
               style={{
                 width: "100%",
-                maxWidth: "560px",
+                maxWidth: "520px",
                 aspectRatio: "16 / 9",
                 borderRadius: "16px",
-                overflow: "hidden",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
               }}
-            >
-              <iframe
-                src={heroDrivePreviewUrl}
-                title="Seaward House Reel"
-                style={{ width: "100%", height: "100%", border: "none" }}
-                allow="autoplay"
-                allowFullScreen
-              />
-            </div>
+            />
           </div>
         </div>
       </section>
