@@ -91,7 +91,7 @@ export default function SeawardHouseWebsite() {
           <div className="absolute bottom-[-40px] left-[-60px] h-72 w-72 rounded-full border border-black" />
         </div>
 
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:gap-14 lg:px-10 lg:py-28">
+        <div className="mx-auto grid max-w-[84rem] gap-12 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-12 xl:gap-14 lg:px-10 lg:py-28">
           <div className="max-w-3xl">
             <div className="mb-6">
               <div className="inline-flex items-center rounded-full border border-black/15 px-4 py-2 text-xs uppercase tracking-[0.26em] text-black/65">
@@ -101,11 +101,11 @@ export default function SeawardHouseWebsite() {
                 Serving Ventura, Ojai, Santa Barbara, and Los Angeles
               </p>
             </div>
-            <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
+            <h1 className="text-5xl font-black uppercase leading-[0.92] tracking-tight sm:text-6xl lg:text-8xl">
               Cinematic content for brands that want to look expensive.
             </h1>
             <p className="mt-8 max-w-2xl text-base leading-7 text-black/70 sm:text-lg">
-              Seaward House centers Ventura video production on every engagement. A commercial videographer in Ventura leads the frame, brand photography in Ventura matches your motion, and social media content for businesses still reads considered, not templated. That is the backbone of content creation Ventura teams can treat as infrastructure, not an add on.
+              Seaward House is a Ventura-based video production company creating commercial, social, and branded content that actually feels cinematic. We help brands stand out with high-end visuals, fast execution, and content built to perform across web, social, and ads.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
@@ -129,21 +129,22 @@ export default function SeawardHouseWebsite() {
             </div>
           </div>
 
-          <div className="flex w-full justify-center lg:justify-end">
-            <iframe
-              src={heroYouTubeEmbedUrl}
-              title="Seaward House Reel"
-              frameBorder={0}
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              style={{
-                width: "100%",
-                maxWidth: "520px",
-                aspectRatio: "16 / 9",
-                borderRadius: "16px",
-                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-              }}
-            />
+          <div className="flex w-full justify-center self-center lg:justify-end">
+            <div className="w-full max-w-[720px] transition-transform duration-300 ease-out hover:scale-[1.02]">
+              <iframe
+                src={heroYouTubeEmbedUrl}
+                title="Seaward House Reel"
+                frameBorder={0}
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                style={{
+                  width: "100%",
+                  aspectRatio: "16 / 9",
+                  borderRadius: "16px",
+                  boxShadow: "0 20px 70px rgba(0,0,0,0.10)",
+                }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -310,24 +311,75 @@ export default function SeawardHouseWebsite() {
       <section
         id="contact"
         className="bg-black px-6 py-24 text-white lg:px-10 lg:py-28"
-        aria-labelledby="cta-heading"
+        aria-labelledby="contact-heading"
       >
         <div className="mx-auto max-w-7xl">
-          <h2
-            id="cta-heading"
-            className="max-w-3xl text-3xl font-black uppercase leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl"
-          >
-            Ready to build something?
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Tell us what you need and we&apos;ll put together the right creative approach.
-          </p>
-          <a
-            href="mailto:hello@seawardhouse.com"
-            className="mt-10 inline-flex rounded-2xl border border-white/30 bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:bg-white/90"
-          >
-            Contact
-          </a>
+          <div className="max-w-xl">
+            <h2
+              id="contact-heading"
+              className="text-3xl font-black uppercase leading-[1.05] tracking-tight sm:text-4xl lg:text-5xl"
+            >
+              Start a Project
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-white/70 sm:text-lg">
+              Tell us about your project and we&apos;ll get back to you.
+            </p>
+            <form
+              className="mt-10 space-y-6"
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <div>
+                <label
+                  htmlFor="contact-name"
+                  className="mb-2 block text-[11px] uppercase tracking-[0.22em] text-white/55"
+                >
+                  Name
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  className="w-full rounded-2xl bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-white/30"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="contact-email"
+                  className="mb-2 block text-[11px] uppercase tracking-[0.22em] text-white/55"
+                >
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  className="w-full rounded-2xl bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-white/30"
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="contact-message"
+                  className="mb-2 block text-[11px] uppercase tracking-[0.22em] text-white/55"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={5}
+                  className="w-full resize-y rounded-2xl bg-white/5 px-4 py-3.5 text-sm text-white placeholder:text-white/35 focus:outline-none focus:ring-1 focus:ring-white/30"
+                />
+              </div>
+              <button
+                type="submit"
+                className="inline-flex rounded-2xl border border-white/30 bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.2em] text-black transition hover:bg-white/90"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
