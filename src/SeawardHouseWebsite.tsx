@@ -1,13 +1,36 @@
+import { useMemo } from "react";
+
 const heroYouTubeEmbedUrl =
   "https://www.youtube.com/embed/sbefhNHI0jE?autoplay=1&mute=1&loop=1&playlist=sbefhNHI0jE&controls=0&modestbranding=1";
 
-const selectedWorkPlaceholders = [
+/** Base portfolio frames; expanded below so the grid can show 9–12 tiles. */
+const selectedWorkBaseImages = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992583/Screenshot_2026-04-23_at_4.18.04_PM_pot0x2.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992498/Screenshot_2026-04-23_at_4.15.55_PM_w7ejbd.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992505/Screenshot_2026-04-23_at_4.15.08_PM_i18ddl.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
 ];
+
+const selectedWorkPlaceholders = [
+  ...selectedWorkBaseImages,
+  selectedWorkBaseImages[2],
+  selectedWorkBaseImages[5],
+  selectedWorkBaseImages[0],
+  selectedWorkBaseImages[7],
+];
+
+function shuffleSelectedWork<T>(items: readonly T[]): T[] {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
 
 const whatWeDoColumns = [
   {
@@ -46,6 +69,11 @@ const whoCategories = [
 ];
 
 export default function SeawardHouseWebsite() {
+  const selectedWorkImages = useMemo(
+    () => shuffleSelectedWork(selectedWorkPlaceholders),
+    [],
+  );
+
   return (
     <div className="min-h-screen bg-[#f8f8f8] text-black">
       <header className="border-b border-black/10 bg-[#f8f8f8]">
@@ -209,8 +237,7 @@ export default function SeawardHouseWebsite() {
         </div>
       </section>
 
-      <section
-        id="work"
+      <section id="work"
         className="border-b border-black/10 bg-[#f3f3f3] px-6 py-20 lg:px-10 lg:py-28"
         aria-labelledby="selected-work-heading"
       >
@@ -226,18 +253,25 @@ export default function SeawardHouseWebsite() {
               Selected work
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-black/60 sm:text-[15px]">
-              Placeholder frames from recent shoots. Final selects and motion pieces ship on delivery.
+              Selected work from recent commercial and brand projects.
             </p>
           </div>
 
           <ul className="mx-auto grid w-full max-w-7xl list-none grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            {selectedWorkPlaceholders.map((src, i) => (
-              <li key={`${src}-${i}`} className="min-w-0">
-                <div className="overflow-hidden rounded-[16px] border border-black/10 shadow-[0_8px_28px_rgba(0,0,0,0.05)]">
+            {selectedWorkImages.map((src, i) => (
+              <li
+                key={`work-tile-${i}`}
+                className={`min-w-0${i === 0 ? " md:col-span-2" : ""}`}
+              >
+                <div className="group overflow-hidden rounded-[16px] border border-black/10 shadow-[0_8px_28px_rgba(0,0,0,0.05)]">
                   <img
                     src={src}
                     alt={`Selected work placeholder ${i + 1}`}
-                    className="h-[260px] w-full object-cover"
+                    className={`w-full object-cover transition-transform duration-[300ms] ease-[ease] group-hover:scale-[1.03] ${
+                      i === 0
+                        ? "h-[300px] md:h-[420px]"
+                        : "h-[260px]"
+                    }`}
                     loading="lazy"
                   />
                 </div>
@@ -308,8 +342,7 @@ export default function SeawardHouseWebsite() {
         </div>
       </section>
 
-      <section
-        id="contact"
+      <section id="contact"
         className="bg-black px-6 py-24 text-white lg:px-10 lg:py-28"
         aria-labelledby="contact-heading"
       >
