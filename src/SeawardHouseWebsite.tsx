@@ -1,27 +1,25 @@
-import { useMemo } from "react";
-
 const heroYouTubeEmbedUrl =
   "https://www.youtube.com/embed/sbefhNHI0jE?autoplay=1&mute=1&loop=1&playlist=sbefhNHI0jE&controls=0&modestbranding=1";
 
-/** Base portfolio frames; expanded below so the grid can show 9–12 tiles. */
-const selectedWorkBaseImages = [
+/**
+ * Selected Work — unique Cloudinary URLs only.
+ * Visually duplicate frames removed (one kept per subject): Oreo cup, Shottys bottle,
+ * diamond splash, van scene — weaker / earlier burst picks dropped manually.
+ */
+const images = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992583/Screenshot_2026-04-23_at_4.18.04_PM_pot0x2.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992498/Screenshot_2026-04-23_at_4.15.55_PM_w7ejbd.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992505/Screenshot_2026-04-23_at_4.15.08_PM_i18ddl.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
-];
-
-const selectedWorkPlaceholders = [
-  ...selectedWorkBaseImages,
-  selectedWorkBaseImages[2],
-  selectedWorkBaseImages[5],
-  selectedWorkBaseImages[0],
-  selectedWorkBaseImages[7],
-];
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934300/Screenshot_2026-05-04_at_3.37.56_PM_vsxnq4.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934312/Screenshot_2026-05-04_at_3.35.32_PM_gxotsu.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934308/Screenshot_2026-05-04_at_3.33.31_PM_yie2yx.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934314/Screenshot_2026-05-04_at_3.33.10_PM_ixkscn.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934313/Screenshot_2026-05-04_at_3.36.15_PM_avbe5g.png",
+] as const;
 
 function shuffleSelectedWork<T>(items: readonly T[]): T[] {
   const copy = [...items];
@@ -31,6 +29,8 @@ function shuffleSelectedWork<T>(items: readonly T[]): T[] {
   }
   return copy;
 }
+
+const selectedWorkImages = shuffleSelectedWork(images);
 
 const whatWeDoColumns = [
   {
@@ -69,11 +69,6 @@ const whoCategories = [
 ];
 
 export default function SeawardHouseWebsite() {
-  const selectedWorkImages = useMemo(
-    () => shuffleSelectedWork(selectedWorkPlaceholders),
-    [],
-  );
-
   return (
     <div className="min-h-screen bg-[#f8f8f8] text-black">
       <header className="border-b border-black/10 bg-[#f8f8f8]">
