@@ -1,21 +1,20 @@
+import { useState } from "react";
+
 const heroYouTubeEmbedUrl =
   "https://www.youtube.com/embed/sbefhNHI0jE?autoplay=1&mute=1&loop=1&playlist=sbefhNHI0jE&controls=0&modestbranding=1";
 
-/**
- * Selected Work — fixed 3×2 agency grid (no shuffle).
- * Order: food hero → cinematic → lifestyles → product → detail (blurry drink frame removed).
- */
-const selectedWorkGridImages = [
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
+/** Selected Work — carousel slides (same URLs, no duplicates). */
+const selectedWorkImageUrls = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934308/Screenshot_2026-05-04_at_3.33.31_PM_yie2yx.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934313/Screenshot_2026-05-04_at_3.36.15_PM_avbe5g.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934312/Screenshot_2026-05-04_at_3.35.32_PM_gxotsu.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992498/Screenshot_2026-04-23_at_4.15.55_PM_w7ejbd.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992505/Screenshot_2026-04-23_at_4.15.08_PM_i18ddl.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934314/Screenshot_2026-05-04_at_3.33.10_PM_ixkscn.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
 ] as const;
-
-const workTileFrame =
-  "overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]";
 
 const whatWeDoColumns = [
   {
@@ -54,6 +53,13 @@ const whoCategories = [
 ];
 
 export default function SeawardHouseWebsite() {
+  const [workSlide, setWorkSlide] = useState(0);
+  const workCount = selectedWorkImageUrls.length;
+  const workIndex =
+    workCount > 0 ? ((workSlide % workCount) + workCount) % workCount : 0;
+  const workSrc =
+    workCount > 0 ? selectedWorkImageUrls[workIndex] : "";
+
   return (
     <div className="min-h-screen bg-[#f8f8f8] text-black">
       <header className="border-b border-black/10 bg-[#f8f8f8]">
@@ -221,8 +227,8 @@ export default function SeawardHouseWebsite() {
         className="border-b border-black/10 bg-[#f3f3f3] px-6 py-20 lg:px-10 lg:py-28"
         aria-labelledby="selected-work-heading"
       >
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 max-w-2xl lg:mb-14">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="max-w-2xl">
             <div className="text-[11px] uppercase tracking-[0.28em] text-black/45">
               Portfolio
             </div>
@@ -232,28 +238,91 @@ export default function SeawardHouseWebsite() {
             >
               Selected work
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-black/60 sm:text-[15px]">
+            <p className="mt-2 text-sm leading-relaxed text-black/60 sm:text-[15px]">
               Selected work from recent commercial and brand projects.
             </p>
           </div>
 
-          <ul className="mx-auto grid w-full max-w-7xl list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 md:gap-8">
-            {selectedWorkGridImages.map((src, i) => (
-              <li
-                key={src}
-                className={`min-w-0${i === 0 ? " md:col-span-2" : ""}`}
-              >
-                <div className={`${workTileFrame} aspect-video w-full`}>
-                  <img
-                    src={src}
-                    alt={`Selected work ${i + 1}`}
-                    className="h-full w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
+          {workCount > 0 ? (
+            <div
+              className="mt-6 w-full"
+              role="region"
+              aria-label="Selected work slideshow"
+            >
+              <div className="relative mx-auto aspect-video w-full overflow-hidden rounded-[24px] bg-black/5 shadow-[0_12px_40px_-10px_rgba(0,0,0,0.12)]">
+                <img
+                  src={workSrc}
+                  alt={`Selected work slide ${workIndex + 1} of ${workCount}`}
+                  className="h-full w-full object-cover"
+                  loading={workIndex === 0 ? "eager" : "lazy"}
+                />
+                <button
+                  type="button"
+                  onClick={() =>
+                    setWorkSlide((i) => (i - 1 + workCount) % workCount)
+                  }
+                  className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-black shadow-sm backdrop-blur-sm transition hover:bg-white"
+                  aria-label="Previous slide"
+                >
+                  <svg
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setWorkSlide((i) => (i + 1) % workCount)
+                  }
+                  className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-black shadow-sm backdrop-blur-sm transition hover:bg-white"
+                  aria-label="Next slide"
+                >
+                  <svg
+                    className="h-5 w-5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                    aria-hidden="true"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="mt-5 flex justify-center gap-2">
+                {selectedWorkImageUrls.map((url, i) => (
+                  <button
+                    key={url}
+                    type="button"
+                    aria-label={`Go to slide ${i + 1}`}
+                    aria-current={i === workIndex ? true : undefined}
+                    onClick={() => setWorkSlide(i)}
+                    className={
+                      i === workIndex
+                        ? "h-2 w-2 rounded-full bg-black transition"
+                        : "h-2 w-2 rounded-full bg-black/25 transition hover:bg-black/45"
+                    }
+                  >
+                    <span className="sr-only">Slide {i + 1}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
