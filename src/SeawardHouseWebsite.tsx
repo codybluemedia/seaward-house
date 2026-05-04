@@ -2,35 +2,20 @@ const heroYouTubeEmbedUrl =
   "https://www.youtube.com/embed/sbefhNHI0jE?autoplay=1&mute=1&loop=1&playlist=sbefhNHI0jE&controls=0&modestbranding=1";
 
 /**
- * Selected Work — unique Cloudinary URLs only.
- * Visually duplicate frames removed (one kept per subject): Oreo cup, Shottys bottle,
- * diamond splash, van scene — weaker / earlier burst picks dropped manually.
+ * Selected Work — fixed 3×2 agency grid (no shuffle).
+ * Order: food hero → cinematic → lifestyles → product → detail (blurry drink frame removed).
  */
-const images = [
+const selectedWorkGridImages = [
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.14.51_PM_etcakn.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992599/Screenshot_2026-04-23_at_4.15.28_PM_g9hftg.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992601/Screenshot_2026-04-23_at_4.15.00_PM_vvnape.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992498/Screenshot_2026-04-23_at_4.15.55_PM_w7ejbd.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992505/Screenshot_2026-04-23_at_4.15.08_PM_i18ddl.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934300/Screenshot_2026-05-04_at_3.37.56_PM_vsxnq4.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934312/Screenshot_2026-05-04_at_3.35.32_PM_gxotsu.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934308/Screenshot_2026-05-04_at_3.33.31_PM_yie2yx.png",
-  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934314/Screenshot_2026-05-04_at_3.33.10_PM_ixkscn.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992577/Screenshot_2026-04-23_at_4.19.58_PM_wr7ooy.png",
   "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934313/Screenshot_2026-05-04_at_3.36.15_PM_avbe5g.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1777934312/Screenshot_2026-05-04_at_3.35.32_PM_gxotsu.png",
+  "https://res.cloudinary.com/dqbuu6xee/image/upload/v1776992585/Screenshot_2026-04-23_at_4.16.26_PM_e7ideo.png",
 ] as const;
 
-function shuffleSelectedWork<T>(items: readonly T[]): T[] {
-  const copy = [...items];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
-const selectedWorkImages = shuffleSelectedWork(images);
+const workTileFrame =
+  "overflow-hidden rounded-xl border border-black/10 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]";
 
 const whatWeDoColumns = [
   {
@@ -252,21 +237,17 @@ export default function SeawardHouseWebsite() {
             </p>
           </div>
 
-          <ul className="mx-auto grid w-full max-w-7xl list-none grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-            {selectedWorkImages.map((src, i) => (
+          <ul className="mx-auto grid w-full max-w-7xl list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 md:gap-8">
+            {selectedWorkGridImages.map((src, i) => (
               <li
-                key={`work-tile-${i}`}
+                key={src}
                 className={`min-w-0${i === 0 ? " md:col-span-2" : ""}`}
               >
-                <div className="group overflow-hidden rounded-[16px] border border-black/10 shadow-[0_8px_28px_rgba(0,0,0,0.05)]">
+                <div className={`${workTileFrame} aspect-video w-full`}>
                   <img
                     src={src}
-                    alt={`Selected work placeholder ${i + 1}`}
-                    className={`w-full object-cover transition-transform duration-[300ms] ease-[ease] group-hover:scale-[1.03] ${
-                      i === 0
-                        ? "h-[300px] md:h-[420px]"
-                        : "h-[260px]"
-                    }`}
+                    alt={`Selected work ${i + 1}`}
+                    className="h-full w-full object-cover"
                     loading="lazy"
                   />
                 </div>
